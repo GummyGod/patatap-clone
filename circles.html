@@ -5,15 +5,26 @@
 	<script type="text/javascript" src="paper-full.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="circles.css">
 	<script type="text/paperscript" canvas="myCanvas">
-
+	var circles = [];
 	function onKeyDown(event) {
 		var maxP = new Point(view.size.width, view.size.height);
 		var randomP = Point.random();
 		console.log(randomP);
 		var point = maxP * randomP;
-		new Path.Circle(new Point(point), 10).fillColor = 'red';
+		var circle = new Path.Circle(new Point(point), 10)
+		circle.fillColor = 'red';
+		circles.push(circle);
+
 	}
 
+	var animatedCircle = new Path.Circle(new Point(300,300), 100)
+	animatedCircle.fillColor = "red";
+	function onFrame() {
+		for (var i = 0 ; i < circles.length; i++) {
+			circles[i].fillColor.hue += 1 ;
+			//circles[i].animatedCircle.scale(.9);
+		}
+	}
 </script>
 </head>
 <body>
